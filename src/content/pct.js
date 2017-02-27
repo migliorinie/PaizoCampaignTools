@@ -231,6 +231,19 @@
         var newLinks = document.querySelectorAll('table > tbody > tr > td > table > tbody > tr > td > blockquote > ul > li > span.tiny > span > a:not([title^="Stop"])');
 
         for (var i=0; i<newLinks.length; i++) {
+        var dest = newLinks[i].href;
+            var sep = dest.split("#");
+            var postDest = parseInt(sep[1]);
+            sep = sep[0].split("=");
+            var pageDest = parseInt(sep[1]);
+            if (postDest%50 == 0) {
+                pageDest++;
+            }
+            postDest++;
+            
+            var newDest = sep[0] + "=" + pageDest + "#" + postDest;
+            newLinks[i].href = newDest;
+            
             newLinks[i].style.backgroundColor=highlightColor;
         }
     }
